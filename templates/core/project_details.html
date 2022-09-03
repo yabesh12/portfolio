@@ -1,0 +1,78 @@
+
+{% extends 'core/base.html' %}
+{% load static %}
+{% block content %}
+
+
+</head>
+
+<body>
+
+  <main id="main">
+
+    <!-- ======= Portfolio Details Section ======= -->
+    <section id="portfolio-details" class="portfolio-details">
+      <div class="container">
+
+
+          <div class="text-right"><a href="{% url 'home' %}" class="btn btn-light" type="submit">Go To Home</a></div><br>
+
+
+        <div class="row gy-4">
+
+
+          <div class="col-lg-8">
+            <div class="portfolio-details-slider swiper">
+              <div class="swiper-wrapper align-items-center">
+
+                {% for image in project_images %}
+
+                <div class="swiper-slide">
+                  <img src="{{image.image.url}}" alt="">
+                </div>
+
+                {% endfor %}
+
+              </div>
+              <div class="swiper-pagination"></div>
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="portfolio-info">
+              <h3>Project information</h3>
+              <ul>
+                <li><strong>Category</strong>: {{category}}</li>
+                <li><strong>Client</strong>: {{client}}</li>
+                <li><strong>Project date</strong>: {{project_date}} </li>
+                <li><strong>Project URL</strong>: <a href="{{project_url}}" onclick="window.open(this.href,'_blank');return false;">{{project_url}}</a></li>
+              </ul>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="row gy-4">
+          <div class="col-lg-10">
+            <div class="portfolio-description">
+              <h2>Project Detail</h2>
+              <p>
+                {{description|linebreaks}}
+              </p>
+            </div>
+          </div>
+        </div>  
+
+      </div>
+    </section><!-- End Portfolio Details Section -->
+
+  </main><!-- End #main -->
+<!-- 
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+ -->
+
+</body>
+
+{% endblock %}
