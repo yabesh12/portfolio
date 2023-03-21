@@ -20,6 +20,7 @@ class PersonalDetail(models.Model):
 	bg_image = models.ImageField()
 	address = models.CharField(max_length=200, null=True, blank=True)
 	pincode = models.PositiveIntegerField(blank=True, null=True)
+	resume = models.FileField(blank=True, null=True)
 
 	def __str__(self):
 		return f"{self.name}"

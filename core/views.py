@@ -1,5 +1,6 @@
+import os
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import FileResponse, HttpResponse
 from core.models import PersonalDetail, ProjectDetail, ProjectDetailImage, ProjectCategory, Client
 from datetime import date
 from django.db.models import Subquery
@@ -10,6 +11,7 @@ from threading import Thread
 from django.core.mail import send_mail
 from portfolio.settings import EMAIL_HOST_USER
 from .utils import validate_email
+from django.http import FileResponse
 
 # Create your views here.
 
@@ -138,3 +140,11 @@ def ajax_send_email_message(request):
     # messages.success(request, f"Thankyou {name}, Message Sent successfully! I'll talk to you ASAP")
     # return render(request, 'core/index.html')
     return HttpResponse(msg)
+
+
+### Download Resume
+def download_resume(request):
+    resume_obj = PersonalDetail.objects.filter().first()
+    print(resume_obj.resume.file)
+    context = {'resume' : resume_obj.resume}
+    return render(request, 'core/summary_pdf.html', context)
