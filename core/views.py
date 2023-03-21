@@ -145,6 +145,8 @@ def ajax_send_email_message(request):
 ### Download Resume
 def download_resume(request):
     resume_obj = PersonalDetail.objects.filter().first()
+    if resume_obj is None:
+        return HttpResponse("<h2>No Resume Found!</h2>")
     print(resume_obj.resume.file)
     context = {'resume' : resume_obj.resume}
     return render(request, 'core/summary_pdf.html', context)
